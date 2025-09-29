@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigation } from '../contexts/AppContext.js'
 import { mockUsers } from '../data/mockUsers.js'
 import type { User } from '../types/index.js'
 
 export const UserList = () => {
+  const { getPath } = useNavigation()
   const [users, setUsers] = useState<User[]>(mockUsers)
   const [roleFilter, setRoleFilter] = useState<string>('all')
   const [statusFilter, setStatusFilter] = useState<string>('all')
@@ -58,7 +60,7 @@ export const UserList = () => {
     <div>
       <div className="page-header">
         <h1 className="page-title">Users</h1>
-        <Link to="/create" className="btn">
+        <Link to={getPath('/create')} className="btn">
           ➕ Add New User
         </Link>
       </div>
@@ -144,7 +146,7 @@ export const UserList = () => {
                     <div>
                       <div style={{ fontWeight: '500' }}>
                         <Link 
-                          to={`/detail/${user.id}`}
+                          to={getPath(`/detail/${user.id}`)}
                           style={{ color: '#007bff', textDecoration: 'none' }}
                         >
                           {user.name}
@@ -180,7 +182,7 @@ export const UserList = () => {
                 <td>
                   <div style={{ display: 'flex', gap: '5px' }}>
                     <Link 
-                      to={`/detail/${user.id}`}
+                      to={getPath(`/detail/${user.id}`)}
                       className="btn btn-outline"
                       style={{ padding: '4px 8px', fontSize: '12px' }}
                     >
@@ -218,7 +220,7 @@ export const UserList = () => {
             >
               Clear Filters
             </button>
-            <Link to="/create" className="btn">
+            <Link to={getPath('/create')} className="btn">
               Add First User
             </Link>
           </div>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigation } from '../contexts/AppContext.js'
 import { mockRoles } from '../data/mockUsers.js'
 
 export const Roles = () => {
+  const { getPath } = useNavigation()
   const [roles] = useState(mockRoles)
 
   const permissions = [
@@ -30,7 +32,7 @@ export const Roles = () => {
     <div>
       <div className="page-header">
         <h1 className="page-title">Roles & Permissions</h1>
-        <Link to="/list" className="btn btn-outline">
+        <Link to={getPath('/list')} className="btn btn-outline">
           ← Back to Users
         </Link>
       </div>

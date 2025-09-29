@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useNavigation } from '../contexts/AppContext.js'
 import { mockUsers, mockActivity } from '../data/mockUsers.js'
 import type { User, ActivityItem } from '../types/index.js'
 
 export const UserDetail = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const { getPath } = useNavigation()
   const [user, setUser] = useState<User | null>(null)
   const [userActivity, setUserActivity] = useState<ActivityItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,7 +50,7 @@ export const UserDetail = () => {
         <p style={{ color: '#666', marginBottom: '20px' }}>
           The user you're looking for doesn't exist.
         </p>
-        <Link to="/list" className="btn">
+        <Link to={getPath('/list')} className="btn">
           ← Back to Users
         </Link>
       </div>
@@ -66,7 +68,7 @@ export const UserDetail = () => {
           >
             ← Back
           </button>
-          <Link to="/list" className="btn btn-outline">
+          <Link to={getPath('/list')} className="btn btn-outline">
             All Users
           </Link>
         </div>

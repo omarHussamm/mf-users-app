@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useNavigation } from '../contexts/AppContext.js'
 
 export const CreateUser = () => {
   const navigate = useNavigate()
+  const { getPath } = useNavigation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,7 +22,7 @@ export const CreateUser = () => {
 
     console.log('Creating user:', formData)
     alert('User created successfully!')
-    navigate('/list')
+    navigate(getPath('/list'))
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -34,7 +36,7 @@ export const CreateUser = () => {
     <div>
       <div className="page-header">
         <h1 className="page-title">Create New User</h1>
-        <Link to="/list" className="btn btn-outline">
+        <Link to={getPath('/list')} className="btn btn-outline">
           ← Back to Users
         </Link>
       </div>
@@ -173,7 +175,7 @@ export const CreateUser = () => {
 
           <div className="card">
             <div style={{ display: 'flex', gap: '15px', justifyContent: 'flex-end' }}>
-              <Link to="/list" className="btn btn-outline">
+              <Link to={getPath('/list')} className="btn btn-outline">
                 Cancel
               </Link>
               <button type="submit" className="btn">
